@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Envoyer CV</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h1>Envoyer CV</h1>
+    <form>
+        <p>Nom: <input type="text" name="nom"/></p>
+        <p>Date de naissance: <input type="date" name="date_naissance"/></p>
+        <p>Sexe:
+            <select name="id_sexe">
+                <option value="#">Choisir</option>
+                <option value="">Homme</option>
+                <option value="">Femme</option>
+                <option value="">Mixte</option>
+            </select>
+        </p>
+        <p>Année d'expérience: <input type="number" name="experience"/></p>
+
+        <!-- Diplôme requis -->
+        <div id="diplome-container">
+            <p>
+                Diplôme requis:
+                <select name="id_diplome[]">
+                    <option value="#">Choisir</option>
+                    <option value="">CEPE</option>
+                    <option value="">BEPC</option>
+                    <option value="">BAC</option>
+                    <option value="">Licence</option>
+                    <option value="">Master 1</option>
+                    <option value="">Master 2</option>
+                    <option value="">Doctorat</option>
+                </select>
+
+                Filière:
+                <select name="id_filiere[]">
+                    <option value="#">Choisir</option>
+                    <option value="">Communication</option>
+                    <option value="">Economie</option>
+                    <option value="">Comptabilité et Finance</option>
+                </select>
+
+                Lieu:
+                <input type="text" name="lieu_etude[]"/>
+                <button type="button" onclick="addFields('diplome')">+</button>
+            </p>
+        </div>
+
+        <!-- Langues -->
+        <p>Langues :</p>
+        <p>
+            <label><input type="checkbox" name="langues" value="francais"> Français</label><br>
+            <label><input type="checkbox" name="langues" value="anglais"> Anglais</label><br>
+            <label><input type="checkbox" name="langues" value="espagnol"> Espagnol</label><br>
+            <label><input type="checkbox" name="langues" value="allemand"> Allemand</label><br>
+            <label><input type="checkbox" name="langues" value="malgache"> Malgache</label>
+        </p>
+
+        <!-- Expériences -->
+        <div id="experience-container">
+            <p>
+                Expériences:
+                Debut: 
+                <input type="date" name="debut_exp[]"/>
+                Fin: 
+                <input type="date" name="fin_exp[]"/>
+                Poste occupé: 
+                <input type="text" name="poste_occupe[]"/>
+                Entreprise: 
+                <input type="text" name="entreprise[]"/>
+                <button type="button" onclick="addFields('experience')">+</button>
+            </p>
+        </div> 
+
+        <p><input type="submit" value="Postuler"/></p>
+    </form>
+
+    <script>
+        function addFields(type) {
+            let newFields = document.createElement("p");
+
+            if (type === 'diplome') {
+                newFields.innerHTML = `
+                    Diplôme requis:
+                    <select name="id_diplome[]">
+                        <option value="#">Choisir</option>
+                        <option value="">CEPE</option>
+                        <option value="">BEPC</option>
+                        <option value="">BAC</option>
+                        <option value="">Licence</option>
+                        <option value="">Master 1</option>
+                        <option value="">Master 2</option>
+                        <option value="">Doctorat</option>
+                    </select>
+                    Filière:
+                    <select name="id_filiere[]">
+                        <option value="#">Choisir</option>
+                        <option value="">Communication</option>
+                        <option value="">Economie</option>
+                        <option value="">Comptabilité et Finance</option>
+                    </select>
+                    Lieu:
+                    <input type="text" name="lieu_etude[]"/>
+                    <button type="button" onclick="removeFields(this)">x</button>`;
+                document.getElementById("diplome-container").appendChild(newFields);
+            } else if (type === 'experience') {
+                newFields.innerHTML = `
+                    Debut:
+                    <input type="date" name="debut_exp[]"/>
+                    Fin:
+                    <input type="date" name="fin_exp[]"/>
+                    Poste occupé:
+                    <input type="text" name="poste_occupe[]"/>
+                    Entreprise:
+                    <input type="text" name="entreprise[]"/>
+                    <button type="button" onclick="removeFields(this)">x</button>`;
+                document.getElementById("experience-container").appendChild(newFields);
+            }
+        }
+
+        function removeFields(button) {
+            button.parentNode.remove();
+        }
+    </script>
+</body>
+</html>
